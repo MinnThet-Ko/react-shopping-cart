@@ -1,0 +1,38 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    margin: 5px;
+    border: 3px solid black;
+}
+
+.item img {
+    width: 200px;
+    height: 200px;
+    margin: 10px 10px;
+}
+
+.item .itemInfo {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.itemTitle {
+    text-align: center;
+    text-wrap: wrap;
+}
+
+.qtyActions{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
