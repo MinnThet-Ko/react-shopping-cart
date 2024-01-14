@@ -1,10 +1,12 @@
 import { useState, useEffect, useContext } from "react"
 import "../styles/item.css"
-import { CartContext } from "./Routes"
+import { CartContext, UserContext } from "./Routes"
+import { addItemToCart, getCartSnapShot } from "../dao/CartDAO"
 
 function Item({ itemImage, itemTitle, itemPrice }) {
 
     const { cartItems, setCartItems } = useContext(CartContext)
+    const { user, setUser } = useContext(UserContext)
 
     const [quantity, setQuantity] = useState(0)
     const [selectedItem, setSelectedItem] = useState("")
@@ -23,9 +25,10 @@ function Item({ itemImage, itemTitle, itemPrice }) {
 
     useEffect(() => {
         if (selectedItem !== "") {
+            
             let currentItem = cartItems.filter((cartItem) => cartItem.title === selectedItem)
             let filteredItems = cartItems.filter((cartItem) => cartItem.title != selectedItem)
-            console.log(filteredItems)
+            addItemToCart(user.id, selectedItem, quantity, itemPrice)
             setCartItems([...filteredItems, {
                 title: selectedItem,
                 quantity: quantity,

@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import NavBar from "./NavBar"
 import Item from "./Item";
+import { addItemToCart } from "../dao/CartDAO";
 import "../styles/mainPage.css"
 
 function MainPage() {

@@ -5,6 +5,7 @@ import RegisterPage from "./RegisterPage";
 import MainPage from "./MainPage";
 import ShoppingCart from "./ShoppingCart";
 import ProfilePage from "./ProfilePage";
+import { getCartSnapShot } from "../dao/CartDAO";
 
 
 //declearing contexts that will be used throughout the app

@@ -1,7 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { UserContext } from "./Routes";
+import { UserContext, CartContext} from "./Routes";
 import { getUserSnapshot } from "../dao/UserDAO";
+import { getCartSnapShot } from "../dao/CartDAO";
 import "../styles/loginPage.css"
 
 function LoginPage() {
@@ -14,6 +15,7 @@ function LoginPage() {
 
     //Context
     const { user, setUser } = useContext(UserContext)
+    const { cartItems, setCartItems } = useContext(CartContext)
 
     //States
     const [users, setUsers] = useState([])
@@ -32,6 +34,7 @@ function LoginPage() {
         
         if (filteredUser != undefined) {
             setUser(filteredUser)
+            setCartItems(getCartSnapShot(filteredUser.id))
             navigation("/home")
         } else {
             setUser({ ...user, email: "", password: "" })

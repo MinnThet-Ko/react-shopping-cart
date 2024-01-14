@@ -1,20 +1,28 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { CartContext } from "./Routes"
+import { CartContext, UserContext } from "./Routes"
+import { getCartSnapShot } from "../dao/CartDAO"
+
 
 function NavBar() {
     const { cartItems, setCartItems } = useContext(CartContext)
+    // const { user, setUser } = useContext(UserContext)
+    // let totalItems = 0
 
-    let totalItems = 0
-    cartItems.forEach((cartItem) => {
-        totalItems += cartItem.quantity
-    })
+    // useEffect(()=>{ 
+    //     let cartList =getCartSnapShot(user.id)
+    //     setCartItems(cartList)
+    // }, [])
+
+    
     return (
         <div>
             <Link to="/home">Main Page</Link>
             <Link to="/cart">Cart</Link>
             <Link to="/profile">Profile</Link>
-            <h1>{totalItems}</h1>
+            <h1>{cartItems.reduce((accumulator, object) => {
+                return accumulator + object.quantity
+            }, 0)}</h1>
         </div>
     )
 
