@@ -1,7 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "./NavBar"
 import Item from "./Item";
-import { addItemToCart } from "../dao/CartDAO";
 import "../styles/mainPage.css"
 
 function MainPage() {
@@ -10,7 +9,9 @@ function MainPage() {
 
     useEffect(
         () => {
-            fetch('https://fakestoreapi.com/products')
+            fetch('https://fakestoreapi.com/products'/*, {
+                mode: 'no-cors'
+            }*/)
                 .then(res => res.json())
                 .then(json => {
                     setShopItems(json)
@@ -18,11 +19,9 @@ function MainPage() {
         }
         , [])
 
-
     return (
         <>
             <NavBar />
-            <h1>Main Page</h1>
             <div className="itemContainter">
                 {
                     shopItems.map((shopItem) => {

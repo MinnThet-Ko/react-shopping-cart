@@ -5,8 +5,10 @@
     justify-content: center;
     align-items: center;
     width: 300px;
+    height: 450px;
     margin: 5px;
     border: 3px solid black;
+    gap: 10px;
 }
 
 .item img {
@@ -35,4 +37,15 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    justify-self: flex-end;
+}
+
+.plusBtn, .minusBtn {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: white;
+    color: black;
 }

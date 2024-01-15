@@ -1,0 +1,41 @@
+.cart {
+    width: 60%;
+    margin: auto;
+}
+
+.headerRow {
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    padding: 10px;
+    border-bottom: 2px solid black ;
+}
+
+.headerItem,
+.headerPrice,
+.headerQuantity,
+.headerAmount,
+.headerAction {
+    font-size: large;
+    font-weight: bolder;
+}
+
+.headerItem {
+    width: 60%;
+}
+
+.headerPrice {
+    width: 10%;
+}
+
+.headerQuantity {
+    width: 10%;
+}
+
+.headerAmount {
+    width: 10%;
+}
+
+.headerAction {
+    width: 10%;
+}

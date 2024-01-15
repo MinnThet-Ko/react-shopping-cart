@@ -1,50 +1,28 @@
-import { useContext, useEffect } from "react";
 import NavBar from "./NavBar"
-import { CartContext, UserContext } from "./Routes";
-import { removeItemFromCart, getCartSnapShot } from "../dao/CartDAO";
-import Item from "./Item";
+import ItemRow from "./ItemRow"
+import { useContext } from "react";
+import { CartContext } from "./Routes";
+import "../styles/shoppingCart.css"
 
 function ShoppingCart() {
 
     const { cartItems, setCartItems } = useContext(CartContext)
-    const { user, setUser } = useContext(UserContext)
-
-    const handleCheckOut = (itemId) => {
-        removeItemFromCart(user.id, itemId)
-        let filteredList = cartItems.filter((cartItem) => cartItem.id !== itemId)
-        setCartItems(filteredList)
-    }
-
     return (
         <>
-            <NavBar/>
-            
-            <h1>Shopping Cart</h1>
-            <table>
-                <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
+            <NavBar />
+            <div className="cart">
+                <div className="headerRow">
+                    <div className="headerItem"> Item </div>
+                    <div className="headerPrice"> Price </div>
+                    <div className="headerQuantity"> Quantity </div>                    
+                    <div className="headerAmount"> Amount </div>
+                    <div className="headerAction"></div>
+                </div>
                 {
-                    cartItems.map((cartItem) => {
-                         return <tr key={cartItem.title}>
-                            <td>{cartItem.title}</td>
-                            <td>{cartItem.quantity}</td>
-                            <td>{cartItem.price}</td>
-                            <td>{cartItem.quantity * cartItem.price}</td>
-                            <td><input type="button" value="Checkout" onClick={() => handleCheckOut(cartItem.id)}/></td>
-                        </tr>
-                    })
-                } 
-                
-                </tbody>
-            </table>           
+                    cartItems.map((cartItem) => {return <ItemRow key={cartItem.id} itemId = {cartItem.id} title={cartItem.title} price={cartItem.price} quantity={cartItem.quantity}/>})
+                }
+            </div>
+
         </>
     );
 }

@@ -1,0 +1,27 @@
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-bottom: 2px solid black;
+}
+
+.title {
+    width: 60%;
+    text-wrap: wrap;
+}
+
+.price {
+    width: 10%;
+}
+
+.quantity {
+    width: 10%;
+}
+
+.amount {
+    width: 10%;
+}
+
+.action {
+    width: 10%;
+}

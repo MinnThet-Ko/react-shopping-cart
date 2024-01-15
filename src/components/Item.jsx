@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import "../styles/item.css"
 import { CartContext, UserContext } from "./Routes"
 import { addItemToCart, getCartSnapShot } from "../dao/CartDAO"
+import { FaPlus, FaMinus } from "react-icons/fa"
 
 function Item({ itemImage, itemTitle, itemPrice }) {
 
@@ -25,18 +26,22 @@ function Item({ itemImage, itemTitle, itemPrice }) {
 
     useEffect(() => {
         if (selectedItem !== "") {
-            
-            let currentItem = cartItems.filter((cartItem) => cartItem.title === selectedItem)
-            let filteredItems = cartItems.filter((cartItem) => cartItem.title != selectedItem)
-            addItemToCart(user.id, selectedItem, quantity, itemPrice)
+            let filteredItem = cartItems.filter((cartItem) => cartItem.title === selectedItem)
+            let filteredItems = cartItems.filter((cartItem) => cartItem.title !== selectedItem)
+            let itemId = addItemToCart(user.id, selectedItem, quantity, itemPrice)
+            let previousQuantity = filteredItem.length >= 1? filteredItem[0].quantity:0;
             setCartItems([...filteredItems, {
+                id: itemId,
                 title: selectedItem,
-                quantity: quantity,
+                quantity: previousQuantity + quantity,
                 price: itemPrice
             }])
+            //setCartItems(getCartSnapShot(user.id))
         }
-        return (
+        return (() => {
             setSelectedItem("")
+            setQuantity(0)
+        }
         )
     }, [selectedItem])
 
@@ -48,9 +53,9 @@ function Item({ itemImage, itemTitle, itemPrice }) {
                 <p>Price: {itemPrice}</p>
             </div>
             <div className="qtyActions">
-                <input type="button" value="+" onClick={handleIncreaseQuantity} />
-                <input type="text" value={quantity} onChange={handleQuantityChange} />
-                <input type="button" value="-" onClick={handleDecreaseQuantity} />
+                <button type="button" className="plusBtn" onClick={handleIncreaseQuantity}><FaPlus /></button>
+                <input type="text" className="qtyInput" value={quantity} onChange={handleQuantityChange} />
+                <button type="button" className="minusBtn" onClick={handleDecreaseQuantity}><FaMinus /></button>
             </div>
             <input type="button" value="Add to cart" onClick={() => setSelectedItem(itemTitle)} />
         </div>

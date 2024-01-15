@@ -2,27 +2,26 @@ import { useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { CartContext, UserContext } from "./Routes"
 import { getCartSnapShot } from "../dao/CartDAO"
+import { FaShoppingCart, FaHome } from "react-icons/fa"
+import "../styles/navbar.css"
 
 
 function NavBar() {
     const { cartItems, setCartItems } = useContext(CartContext)
-    // const { user, setUser } = useContext(UserContext)
-    // let totalItems = 0
 
-    // useEffect(()=>{ 
-    //     let cartList =getCartSnapShot(user.id)
-    //     setCartItems(cartList)
-    // }, [])
-
-    
     return (
-        <div>
-            <Link to="/home">Main Page</Link>
-            <Link to="/cart">Cart</Link>
-            <Link to="/profile">Profile</Link>
-            <h1>{cartItems.reduce((accumulator, object) => {
-                return accumulator + object.quantity
-            }, 0)}</h1>
+        <div className="navBarContainer">
+
+            <h1 className="navBarItem shopName">Shopie</h1>
+
+            <Link to="/home" className="navBarItem"><FaHome/> Main Page</Link>
+            <Link to="/cart" className="navBarItem cartDisplay">
+                <div>
+                <FaShoppingCart />Cart({cartItems.reduce((accumulator, object) => { return accumulator + object.quantity }, 0)})
+                </div>
+            </Link>
+            <Link to="/profile" className="navBarItem">Profile</Link>
+
         </div>
     )
 
